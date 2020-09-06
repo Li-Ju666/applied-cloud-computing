@@ -1,0 +1,99 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{fullpage}
+\usepackage{titlesec}
+
+ \usepackage{amssymb} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm} \newtheorem{theorem}{Theorem}
+\usepackage{booktabs}
+\usepackage{color}
+\usepackage{courier} 
+\usepackage{float}
+\usepackage{mathtools} \mathtoolsset{showonlyrefs}
+\usepackage{multirow}
+\usepackage{tikz} \usetikzlibrary{trees}
+\usepackage{listings}
+
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\renewcommand{\thealgorithm}{}
+
+\usepackage{hyperref}
+\setlength{\parindent}{0pt}
+
+\counterwithin*{section}{part}
+\titleformat{\part}[block]{\LARGE\bfseries}{\Roman{part}}{1em}{}[]
+
+
+\title{\textbf{Applied Cloud Computing\\
+    Uppsala University -- Autumn 2020 \\
+    Report for Lab 1}}
+\author{Li Ju}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\part{Task-1: Provisioning a Virtual Machine}
+\section{Questions}
+\begin{enumerate}
+    \item What is the difference between the private IP and the floating IP?
+    \item Can you access the Internet from the VM without assigning a floating IP to the machine?
+    \item What is the difference between image, instance and snapshot?
+    \item What is the name of the OpenStack service responsible for providing the: a). Image Service and b). Compute Service
+\end{enumerate}
+
+\section{Answers}
+\begin{enumerate}
+    \item Both floating IP address and private IP address of an instance are used for inter-net communications. However, the private IP address is likely to be used for accessing the instance by other instances in private networks while the floating IP address would be used for accessing the instance from public networks\cite{IPdifferences}.
+    \item No, without floating IP address, the instance is not able to access the Internet but only able to communicate with instances of the same private network with its private IP address. 
+    \item An instance is a running entity with volumes (which can be seens as virtual hard disks). A snapshot (of a volume) is a full capture of the volume at a certain time. For snapshots which have an operating system in (more precisely, can be booted) can be called an image, based on which, an instance can be run\cite{imagesnapshot}.
+    \item The name of the OpenStack service for images is glance, and nova-compute is the OpenStack service for Compute Service. 
+\end{enumerate}
+
+\newpage
+\part{Task-2: Block Storage}
+\section{Questions}
+\begin{enumerate}
+    \item What is the technology used to provide volumes in OpenStack? Is it RAID or LVM?
+    \item What is LVM? Explain the advantage(s) of using LVM?
+    \item Can one volume be attached to multiple instances or vice versa?
+    \item Explain the main difference between Ephemeral Storage and Block-Storage. What are the major use-cases for the different storage types?
+    \item Does your VM have ephemeral storage?
+    \item What is the name of the OpenStack service providing volumes?
+\end{enumerate}
+
+\section{Answers}
+\begin{enumerate}
+    \item LVM is used to provide volumes for instances in OpenStack. \cite{lvm}. 
+    \item Logicak Volume Manager (LVM) is a device mapper target that provides logical volume management. LVM can collect physical partitions (PP) in one or multiple physical volumes (PV) as a volume group (VG), and provide logical volumes (LV). After formatted with file systems, logical volumes can be mounted to different instances. \\Comparing with traditional physical volumes, this technique is more flexible: LVM is able to resize LV online, to resize VG by absorbing new PPs or ejecting existing ones. and to move LV between PVs\cite{wiki:lvm}. 
+    \item One instance can attach multiple volumes. Generally one volume should only be attached to one instance (on dashboard of OpenStack), however, a 'multiattach' volume can be created with cinder using command line\cite{multiattach}. 
+    \item Ephemeral Storage is the storage that will be eliminated when its associated virtual machine is terminated. Block Storage is a type of Persistent Storage which outlives other resources and is always available, regardless of the state of a running instance. Ephemeral Storage is usually used to run operating system and scratch space, while Block Storage is used for additional storage to store data\cite{storage}. 
+    \item Yes, if not attached a volume, the virtual machine itself is stored in ephemeral storage. The flavor of different machines indicates the size of ephemeral storage. 
+    \item The name of the OpenStack service providing volumes is cinder. 
+\end{enumerate}
+
+\newpage
+\part{Task-3: Network}
+\section{Questions}
+\begin{enumerate}
+    \item Explain the picture in the tab “Network Topology”
+    \item What is the subnet used by the Tenant?
+    \item What is the role of the router?
+    \item Explain the path of the traffic of the VM to the Internet?
+    \item Find out the unique ID of the external network.
+    \item What is the name of the OpenStack service handling Networks?
+\end{enumerate}
+
+
+
+
+\newpage
+\bibliography{bibs} 
+\bibliographystyle{unsrt}
+\end{document}
