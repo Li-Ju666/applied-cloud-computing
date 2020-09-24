@@ -1,0 +1,177 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{fullpage}
+\usepackage{titlesec}
+
+ \usepackage{amssymb} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm} \newtheorem{theorem}{Theorem}
+\usepackage{booktabs}
+\usepackage{color}
+\usepackage{courier} 
+\usepackage{float}
+\usepackage{mathtools} \mathtoolsset{showonlyrefs}
+\usepackage{multirow}
+\usepackage{tikz} \usetikzlibrary{trees}
+\usepackage{listings}
+
+%\usepackage[style=numeric, sorting=none]{biblatex}       %use the biblatex package
+%\addbibresource{bibs.bib}   %path to the bib file
+%\usepackage[style=numeric, sorting=none]{biblatex}       %use the biblatex package
+%\addbibresource{bibs.bib}   %path to the bib file
+
+
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\renewcommand{\thealgorithm}{}
+
+\usepackage{hyperref}
+\setlength{\parindent}{0pt}
+
+\counterwithin*{section}{part}
+\titleformat{\part}[block]{\LARGE\bfseries}{\Roman{part}}{1em}{}[]
+
+\title{\textbf{Applied Cloud Computing\\
+    Uppsala University -- Autumn 2020 \\
+    Report for Lab 2}}
+\author{Li Ju}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\part{Task 1: }
+\section{Part 1}
+Explain your findings in part 1. Are VMs slower than the physical machine? If yes, explain the reason. Are there alternative to VMs? How do you compare them with VMs? Keep the answer fairly short, limit it to a few sentences, max 1/4 of a page.\\
+
+[Answer]\\
+5 tests are done on the virtual machine: the average and the standard deviation of 5 running times are 21.632s and 0.133s, respectively. Comparing with 20.856s on physical machine, VMs are slightly slower than physical machines, because all instructions must go through an additional virtualization layer to reach CPU from their operating system, while instructions on physical machine will be passed to CPU directly by OS. \\Container technique is an alternative to virtual machine, virtualizing an operating system instead of hardware. To compare their performances, both a container and a virtual machine can be assigned identical hardware resources, do identical testing and compare their running time. 
+
+
+\section{Part 2}
+\paragraph{task 0}
+\begin{enumerate}
+    \item What version of the API are we using?
+    \item Explain how the communication works in OpenStack?
+    \item Can we use EC2 and S3 APIs to communicate with OpenStack?
+\end{enumerate}
+
+[Answers]
+\begin{enumerate}
+    \item We are using openstack 3.18.0 (Stein)
+    \item Openstack is a RESTful API, sending URL requests to the service to issue commands with HTTP\cite{OpenStackcommunication}. Among different components, keystone is the service responsible for identification. With the authenticated keystone session, one can access compute service via nova, access block storage service via cinder, or other services. 
+    \item No, because EC2/S3 are provided by AWS, whose APIs have different syntax with OpenStack. Therefore, they cannot communicate with each other. 
+\end{enumerate}
+
+\paragraph{task 2}
+\begin{enumerate}
+    \item Explain the output?
+    \item What is contextualization?
+    \item What language is use to prepare CloudInit configurations?
+    \item What are the variants of CloudInit package?
+    \item Can we run CloudInit scripts without booting an instance?
+    \item What limitation you can anticipate with the CloudInit package?
+\end{enumerate}
+[Answers]
+\begin{enumerate}
+    \item The output is a group of characters in cow shape, printed by cowsay. The python script wrapped cowsay on virtual machine as a service so that it can be accessed remotely.  
+    \item Contextualization is the step to customize one's virtual machines automatically when booting using a configuration file. 
+    \item In this case, CloudInit uses cloud config files, which is formatted in yaml language. 
+    \item For virtual machines, Ansible is an alternative to CloudInit. For Docker containers, Docker Compose can be used to customize containers. 
+    \item To run CloudInit scripts on new instances, new VMs must be booted. After new instances are booted, it is also possible to run CloudInit scripts again - "sudo cloud-init clean \&\& cloud-init init". 
+    \item The sizeo of script for CloudInit is limited to 163841 bytes. 
+\end{enumerate}
+
+\paragraph{task 4}
+\begin{enumerate}
+    \item What language is used with the Heat service to define the templates?
+    \item What are the advantages of using templates rather than the APIs?
+    \item Explain the different sections in the templates?
+\end{enumerate}
+
+[Answers]
+\begin{enumerate}
+    \item The templates used for heat service are defined in yaml language. 
+    \item Like a recipe, template simplifies the process of initializing multiple virtual machines and other resources, and makes the procedure in a more readable, organized and transferable way, rather than deploying a stack step by step via command line. 
+    \item \begin{enumerate}
+        \item parameters: the section of parameters defined some parameters which may be required when allocating resources, including the flavor, base image, key pair name and public network
+        \item resources: the section of resources describe resources required when creating a stack, including network resources (router, private and public network, floating ip) and computing resources (instances)
+        \item output: the section of outputs describes information which need be returned when finishing allocating resources. 
+    \end{enumerate}
+\end{enumerate}
+
+
+\paragraph{task 5}
+\begin{enumerate}
+    \item In what category of virtualization do containers fall?
+    \item What are the other frameworks that provide container technology. Write at least two name.
+    \item Explain the provided Dockerfile. What does it do? How does it work? Write a brief (one line) description about each line in the Dockerfile.
+    \item Write a brief (one line) description about each command used in Step-2-2.
+    \item What is dockerhub? Write a brief description of how can we use dockerhub for our newly build CSaaS container?
+    \item Write a CloudInit script that contextualize a VM based on the steps (Step-1 and 2) mentioned in this task.
+\end{enumerate}
+
+[Answers]
+\begin{enumerate}
+    \item Container is on the virtualization level of operating system. 
+    \item Besides Docker, CoreOS rkt, Mesos, LXC, OpenVZ are also container tools. 
+    \item Dockerfile is like a recipe telling Docker how to build a customized container image step by step. With the docker image, docker can run a container based on the image. Comments for dockerfile is shown as following: 
+    \begin{enumerate}
+        \item FROM ubuntu: select the base image as ubuntu:latest
+        \item RUN apt-get update: update apt-get lists
+        \item RUN apt-get -y upgrade: upgrade apt-get and automatically choose yes for upgrading options
+        \item RUN apt-get install -y git: install git with apt-get and choose yes in default
+        \item RUN apt-get install -y python-pip: install pip with apt-get and choose yes in default
+        \item RUN pip install --upgrade pip: upgrade pip with pip
+        \item RUN pip install flask: install flask framework with pip
+        \item RUN apt-get install -y cowsay: install cowsay with apt-get and choose yes in default
+        \item RUN git clone https://github.com/TDB-UU/csaas.git: clone the repository for deploying cowsay as a remote service from https://github.com/TDB-UU/csaas.git using git
+        \item WORKDIR /csaas/cowsay: switch working directory to /csaas/cowsay
+        \item EXPOSE 5000: expose port 5000
+        \item ENV PATH="\${PATH}:/usr/games/": set the environment variable PATH as "/usr/games"
+        \item CMD ["python","app.py"]: run the app.py script (script for deploying cowsay as a remote service)
+    \end{enumerate}
+    \item \begin{enumerate}
+        \item docker build -t cowsay:latest .: build a docker image (docker build) from the dockerfile in the current directory (the last "."), and the image name is in \{name:tag\} format as cowsay:latest. 
+        \item docker run -it cowsay: run a docker container (docker run) from the image cowsay (we built just now), and attach the container an interactive (-i) psudo-tty (-t). 
+        \item docker run -d -p 5000:5000 cowsay: run a docker container from the cowsay image background (-d) and map the container system's port 5000 to host machine's port 5000 (-p 5000:5000). 
+    \end{enumerate}
+    \item Dockerhub is a library to share docker images with others: one can upload his/her images and download others' conveniently. When we are building the CSaas container, we ARE using dockerhub: the base image ubuntu is pulled from dockerhub. Also, we can push our dockerfile to dockerhub (e.g. liju666/cowsay:latest). For anyone who wants to build the service, (s)he only needs to run "sudo docker pull liju666/cowsay \&\& sudo docker run -d -p 5000:5000 liju666/cowsay", the service can be deployed on his/her own machine. 
+    \item The CloudInit code is attached with the report. 
+\end{enumerate}
+
+\part{Task 2}
+\section{Part 1}
+Questions on the notebook file are finished and the PDF file of the notebook is attached. 
+\section{Part 2}
+Cloud computing is an emerging computing paradigm from the last decade. It allows users to access a shared pool of a huge amount of resources on demand. Correspondingly, the number of cloud computing vendors increases rapidly as well. They offer clients numerous options when choosing services of IaaS, PaaS and SaaS level. For clients, it is highly possible that they want to immigrate their deployed services from a provider to another, or deploy services with resources across different vendors. Therefore, the concept of cloud interoperability is rising.\cite{zhang2013survey} \\\\
+Lack of interoperability has many causes: 
+\begin{enumerate}
+    \item Generally, different vendors have different SLA(service level agreements), which may cause some problems when operating their resouces together. 
+    \item On IaaS level, different vendors often have different resource management system and different APIs for the system. If you use resources from different providers, orchestration is often hard to do. 
+    \item Resource components from different providers may not be able work together because of different underlying implementations/mechanism. 
+    \item On Paas and Saas level, based on their own infrastructures, many vendors have their own unique services. Once your applications are based on these unique services, it makes it harder to immigrate to other cloud providers.\cite{dillon2010cloud}
+\end{enumerate}
+To improve the interoperability of cloud computing, there are many examples. Generally they can be categorized as three approaches: provider-centric, client-centric and resource management framework supporting interoperability.\cite{dillon2010cloud}\cite{parameswaran2009cloud}\\
+\paragraph{Provider-centric interoperability}
+Provider-centric approach is actually standarization. There are many organizations are efforting to standarize cloud computing. These standards cover access mechanism, virtual appliance, storage, network, security, etc.\cite{wiki:OVF}\cite{wiki:CDMI}\cite{wiki:OCCI} However, standarization of cloud computing requires cloud vendors to follow these standards, which may take a long time. 
+\paragraph{Client-centric interoperability}
+Instead, client-centric interoperability is a more practical approach for clients to manage their resources of different vendors. Clients can create an intermediate layer above providers APIs. The intermediate layer abstracts resources and offer them to users. Users can demand these resources using the intermediate's API regardless of the actual provider of resources. Libcloud and $\delta$-cloud are such APIs clients can use. However, such intermediate layers cannot expose provider-specific services, but only common services from different vendors.\cite{libcloud}\cite{deltacloud}
+\paragraph{Resource management framework supporting interoperability}
+This approach for interoperability is actually encouraging cloud service providers to use those well-implemented open source resource management framework for cloud computing, like OpenStack, Eucalyptus and OpenNebula. It often cost much less to immigrate services from different vendors using the same underlying management framework.
+
+All approaches above are mostly for IaaS level. For higher level like PaaS and Saas, it is often much more difficult to immigrate applications based on these services. To improve cloud interoperability of your own application, it is strongly recommended to use less platform-specific services. \\\\
+"Cloud computing has become a lot like the Hotel California: Once you pick a provider you can check out anytime you want - but you can never leave."\cite{breakthrough}
+
+\section{Part 3}
+
+%\printbibliography[title={References}]
+
+\newpage
+\bibliography{bibs} 
+\bibliographystyle{unsrt}
+\end{document}
