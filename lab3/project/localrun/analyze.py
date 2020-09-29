@@ -10,13 +10,13 @@ def read_json(path):
         for count, line in enumerate(f.readlines(), start=1):
             if count%2==1:
                 data.append(json.loads(line))
-
     return data
 
 def get_texts(data):
     texts = []
     for record in data:
-        texts.append(record.get('text').lower())
+        if record.get('retweeted_status') == None:
+            texts.append(record.get('text').lower())
     return texts
 
 def check_words(texts, dict):
@@ -27,20 +27,20 @@ def check_words(texts, dict):
                 dict[word] += 1
     return dict
 
-# # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-# # Used for recursion
-# # define foldr function
+ # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ # Used for recursion
+ # define foldr function
 # def foldr(func, acc, xs):
-#     return functools.reduce(lambda x, y: func(y, x), xs[::-1], acc)
-#
-# # Check if target pronouns exist and update dictionary
+#      return functools.reduce(lambda x, y: func(y, x), xs[::-1], acc)
+
+#  # Check if target pronouns exist and update dictionary
 # def check(string, accdict):
-#     words = string.split()
-#     def check_word(word, dict):
-#         if dict.get(word) != None:
-#             dict[word] += 1
-#         return dict
-#     return foldr(check_word, accdict, words)
+#      words = string.split()
+#      def check_word(word, dict):
+#          if dict.get(word) != None:
+#              dict[word] += 1
+#          return dict
+#      return foldr(check_word, accdict, words)
 
 baseDir = "./data/"
 files = os.listdir(baseDir)
@@ -55,12 +55,12 @@ for file in files:
     print(file)
     data = read_json(file)
     count += len(data)
-    # Recursion approach
-    # texts = foldr(lambda a, acc: [a.get('text').lower()] + acc, [], data)
-    # stats = foldr(check, stats, texts)
     texts = get_texts(data)
     stats = check_words(texts, stats)
+    # texts = foldr(lambda a, acc: [a.get('text').lower()] + acc, [], data)
+    # stats = foldr(check, stats, texts)
     print(stats)
+
 print("===========")
 print(time.now()-time1)
 print(count)

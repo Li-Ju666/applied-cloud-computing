@@ -1,8 +1,8 @@
 from celery import Celery
 
 app = Celery('proj',
-             broker='amqp://',
-             backend='amqp://',
+             broker='pyamqp://',
+             backend='rpc://',
              include=['celerytest2.tasks'])
 
 # Optional configuration, see the application user guide.
