@@ -1,0 +1,335 @@
+%
+% https://www.overleaf.com/project/5f6a4135086d230001660213
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+% LaTeX Template
+% Version 1.0 (27/12/12)
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+% Original author:
+% Wiki-Books (http://en.wikibooks.org/wiki/LaTeX/Title_Creation)
+% Modified by Elsa Slättegård & Henrik Schulze to fit Uppsala university
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\documentclass[a4paper,12pt]{article}
+\usepackage{amsmath}
+\usepackage[british]{babel}
+\usepackage{color}
+\usepackage{float}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{mathtools}
+\usepackage[section]{placeins}
+\usepackage{siunitx}
+\usepackage{textcomp}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[hyphens]{url}
+
+\oddsidemargin  -2.5truemm
+\evensidemargin -29truemm
+\topmargin 0truept
+\headheight 0truept
+\headsep 0truept
+\textheight 229truemm
+\columnsep 8truemm
+\textwidth 170truemm
+%\footheight 0truept
+%\footskip 0truept
+\def\abstract{\begin{center}{\bf ABSTRACT\vspace{-.5em}\vspace{0pt}}\end{center}}
+\def\endabstract{\par}
+
+% https://stackoverflow.com/questions/3175105#3175141 :
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+\setlength{\parskip}{5mm}
+\setlength{\parindent}{0mm}
+
+\begin{document}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+% ^^ Defines a new command for the horizontal lines, with thickness 0.5mm.
+\begin{titlepage}
+\begin{center}
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+%	HEADING SECTIONS
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\textsc{\LARGE Uppsala University}\\[0.4cm] % Name of your university/college
+\includegraphics[scale=.8]{UppsalaUniv_seal.png}\\[0.5cm]
+% Include a department/university logo - this will require the graphicx package
+%\textsc{\Large Assignment 1}\\[0.5cm]
+\textsc{\Large Applied Cloud Computing}\\[0.3cm]
+\textsc{\Large 1TD265 Autumn 2020}
+\\[0.5cm] % Major heading such as course name
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+%	TITLE SECTION
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ \HRule \\[0.4cm]
+ { \LARGE \bfseries Literature Survey -- Group 10}\\ % Title of your document
+ \HRule \\[0.4cm]
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+%	AUTHOR SECTION
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ \large \emph{Copyright authors:} \\[0.2cm]
+ 
+ Meriton Bytyqi,
+ Aneysha Datta,
+ Henrik Schulze
+ Li Ju\\[1cm]
+ \large \today
+\end{center}
+ \begin{abstract}
+The literature seminar consists of two parts:
+ \begin{enumerate}
+  \item
+  Preparing by reading scientific papers and writing answers to the
+  provided questions. The aim is to write about half A4 page per question using a
+  font-size of 12pt. Also, for each paper, prepare one possible question for
+  discussion. The summary should be uploaded in the student portal no
+  later than Tuesday, October 06. The seminar sessions are on
+  Tuesday, October 06, 10:15 – 12:00 (Session -1) and Friday October
+  09, 10:15 – 12:00 (Session-II). In the seminar sessions, we will make
+  groups consisting of 2 to 3 teams. This division will be provided later in
+  the course.
+  \item
+  Active participation in the seminar, where we will discuss and share our
+  understanding of the material we have read, based on the written
+  preparation assignment.
+  \end{enumerate}
+ \end{abstract}
+\end{titlepage}
+
+
+\newpage
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+\section*{Introduction.}
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+\subsection*{Questions for the written part of the literature seminar.}
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+These questions are to be completed in your teams. The articles in student portalen
+serves as a starting point, but please feel free to follow references in those articles
+and also to look for relevant literature on your own. At least five references in your
+answers should be to a scientific paper not provided in the student portal. Your
+answers should contain references to scientific literature, in a consistent referencing
+format.
+
+% \newpage
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+\section{Question 1. Contextualization and orchestration.}
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+\textit{What are the meaning and importance of contextualization and orchestration,
+and what are currently available tools and services in this area?}
+
+The NIST Definition of Cloud Computing \cite{nist}.
+
+Here is another example of a citation \cite{fog}.
+
+Modern virtualization techniques enable users to scale resources from cloud providers up and down on-demand horizontally and vertically. Regarding horizontal elasticity, two problems arise: when a new VM is created, how can we customize it to fit the project, and how can we organize multiple VMs to make them work together properly. \\\\
+Here comes definitions: \\
+Contextualization is a set of processes and mechanisms that enable a service to scale elastically alongside the resources and software that support it through the orchestration of these dependencies toward the common goals of the service.[Name: Towards a contextualization solution for cloud platform services]
+
+Orchestration is a set of operations that cloud providers and application owners undertake for selecting, deploying, monitoring, and dynamically controlling the configuration of hardware and software resources as a system of quality of service (QoS)-assured components that can be seamlessly delivered to end users. [Name: Cloud Resource Orchestration Programming]
+
+
+
+
+
+% This other terminal now displays:
+% \begin{figure}[H]
+%  \centering
+%  \includegraphics[width=0.6\textwidth]{csaas-cowsay.png}
+% \end{figure}
+
+
+\newpage
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+\section{Question 2. Digitalization of society and Big Data applications.}
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+\textit{How does contemporary cloud computing relate to the digitalization of society
+and Big Data applications?}
+
+The NIST Definition of Cloud Computing \cite{nist}.
+
+Here is another example of a citation \cite{fog}.
+
+
+\newpage
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+\section{Question 3. Cloud providers, frameworks and tools.}
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+\textit{Try to, from a technological point of view, relate the following Products/cloud
+providers, frameworks and tools to each other, both historically and in the
+technological problems they have addressed. Is there some logical progression in a
+seemingly fragmented ecosystem?}
+
+\textit{OpenStack, Rackspace, Eucalyptus, Amazon EC2, Google App Engine, Cloud
+Foundry, OpenShift, Mesos, Kubernetes (of course, include more tools and frameworks
+if you find things that interests you).}
+
+2006-Rackspace announced Mosso LLC as their computing platform and its main product is a PaaS service: Cloud site. In 2008, they retooled their products and relaunched with new services: Cloud files and Cloud servers. Cloud site was sold in 2016. \url{https://en.wikipedia.org/wiki/Rackspace_Cloud#History} Now rackspace is mainly an IaaS provider. 
+
+2008- Initially, NASA wanted to consolidate NASA’s web space onto a unified platform. Then they realized that a flexible infrastructure is a prerequisite. They stepped back for an API\_driven compute and storage system. \url{https://open.nasa.gov/blog/nebula-nasa-and-openstack/} Nebula project started. 
+
+In 2010, when they finished compute controller part, they found that Rackspace was doing something similar: Rackspace decided to rewrite and open source their cloud computing infrastructure framework. \url{https://docs.openstack.org/project-team-guide/introduction.html} They decided to join their forces and in 2010, they released their first version, Austin, in which NASA provided Nova and Rackspace provided Swift. 
+
+2009- Eucalyptus were founded providing an open-source and paid private cloud computing environment. In 2012, they announced an agreement with AWS that AWS APIs are implemented on top of Eucalyptus, which also means Eucalyptus is able to provide private-public hybrid cloud services. In 2014, HP acquired Eucalyptus and provide public cloud services based on Eucalyptus, HP Hellion, and it was shutdown in 2016. 
+
+The origins of AWS can be traced back to 2002, as a developer tool. In 2006, AWS publicly launched, offering S3, EC2 and Simple Queue Service. And in 2009, EBS (elastic block store) and a content delivry network (CDN) are made public. Before, Dropbox, Netflix and Reddit are deployed on AWS before 2010. \url{https://en.wikipedia.org/wiki/Timeline_of_Amazon_Web_Services}
+
+2008-App Engine launched in preview, offering a PaaS service: web applications written in Python can be run on Google's infrastructures. In 2009, Java is supported and next year, Cloud storage launched. Comparing with other application hosting, it can automatic scale for its applications, with more paying, more resources can be used. But due to its underlying infrastructures, a limited range of applications can be run. Therefore, portability becomes a problem. Some open source efforts are made: AppScale, CapeDwarf and Kubernetes (provided by google). \url{https://en.wikipedia.org/wiki/Google_App_Engine}
+
+2011-Cloud Foundry took place. Initially it is designed as a PaaS based on Amazon EC2, by a small team at VMware. Afterwards, it can be deployed over many infrastructure providers: VMware's vSphere, Openstack, AWS, Azure and others. \url{wiki of Cloud Foundry again}\url{https://en.wikipedia.org/wiki/Cloud-computing_comparison}
+
+2011-OpenShift is a family of containerization softwares. Its main flagship product Openshift Container Platform is announced in 2011 but open sourced in 2012, as a PaaS framework. Initially, it is designed for Linux Containers. In Openshift 3, it started docker support. And afterwards in 2014, they joined the community of kubernetes development and start to use it for container orchestration. Openshift can host on IaaS providers, physical machines, or virtual machines.  
+
+a comparison between cloud foundry and openshift
+\url{https://www.hcs-company.com/blog/containers/a-short-comparison-of-openshift-and-cloud-foundry}
+
+to be continued...
+
+[IaaS]
+public cloud providers: Rackspace, AWS, Google Cloud (developed kubernetes), HP Hellion (Based on Eucalyptus)
+private cloud framework: openstack, Eucalyptus (share API with AWS), Nebula
+
+[PaaS]
+public: App Engine
+private: cloud foundry (from VMWare), Openshift (used kubernetes)
+
+
+\newpage
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+\section{Question 4. Elasticity - reactive and proactive autoscaling.}
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+\textit{Elasticity is an important concept in cloud computing. Discuss this both from a
+theoretical basis and from a technological (i.e. what are current ways to achieve
+this). What is the difference between reactive and proactive autoscaling, and what
+are some of the current approaches/proposals to achieve it?}
+
+The NIST Definition of Cloud Computing \cite{nist}.
+
+Here is another example of a citation \cite{fog}.
+
+
+%\newpage
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+%	REFERENCES
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+% \noindent\rule{\textwidth}{.5pt}
+%% ^^ https://tex.stackexchange.com/questions/19579#186191 ^^
+\bibliographystyle{ieeetran}
+{\footnotesize\begin{thebibliography}{1}
+ \bibitem{nist}
+ Peter Mell and Tim Grance.
+ ``The NIST Definition of Cloud Computing'',
+ 2011. \\
+ \url{http://faculty.winthrop.edu/domanm/csci411/Handouts/NIST.pdf}
+
+% \bibitem{}
+% .
+% ``'',
+% 20yy. \\
+% \url{https://}
+
+% \bibitem{}
+% .
+% ``'',
+% 20yy. \\
+% \url{https://}
+
+% \bibitem{}
+% .
+% ``'',
+% 20yy. \\
+% \url{https://}
+
+% \bibitem{}
+% .
+% ``'',
+% 20yy. \\
+% \url{https://}
+
+% \bibitem{}
+% .
+% ``'',
+% 20yy. \\
+% \url{https://}
+
+% \bibitem{}
+% .
+% ``'',
+% 20yy. \\
+% \url{https://}
+
+% \bibitem{}
+% .
+% ``'',
+% 20yy. \\
+% \url{https://}
+
+% \bibitem{}
+% .
+% ``'',
+% 20yy. \\
+% \url{https://}
+
+% \bibitem{}
+% .
+% ``'',
+% 20yy. \\
+% \url{https://}
+
+% \bibitem{}
+% .
+% ``'',
+% 20yy. \\
+% \url{https://}
+
+% \bibitem{}
+% .
+% ``'',
+% 20yy. \\
+% \url{https://}
+
+% \bibitem{}
+% .
+% ``'',
+% 20yy. \\
+% \url{https://}
+
+% \bibitem{}
+% .
+% ``'',
+% 20yy. \\
+% \url{https://}
+
+% \bibitem{}
+% .
+% ``'',
+% 20yy. \\
+% \url{https://}
+
+% \bibitem{}
+% . \\     % List of authors
+% `'',     % Title
+% 20yy. \\ % Year of publication
+% \url{}   % URL - if available
+\end{thebibliography}}
+
+\end{document}
