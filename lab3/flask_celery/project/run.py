@@ -46,6 +46,15 @@ class Statistics(Resource):
                 self.stats['denne'] += tmp['denne']
                 self.stats['hen'] += tmp['hen']
         return self.stats
+
+    # def get_element(self, pronoun):
+    #     sum = 0
+    #     for key in self.stats:
+    #         sum += self.stats[key]
+    #     if sum == 0:
+    #         _ = self.get_all()
+    #     return {pronoun:self.stats[pronoun]}
+
     def get(self):
         return self.get_all()
 
@@ -53,4 +62,3 @@ api.add_resource(Statistics, '/')
 
 if __name__ == '__main__':
     app.run(debug=True)
-
