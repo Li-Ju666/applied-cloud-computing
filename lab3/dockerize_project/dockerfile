@@ -4,4 +4,4 @@ ADD ./project/ /app/
 WORKDIR /app/
 RUN pip3 install -r requirements.txt
 # COPY init.sh /app/init.sh
-CMD celery -A project worker & python3 -m project.run
+CMD celery -A project worker & celery flower -A project --port=5555 & python3 -m project.run

@@ -21,3 +21,12 @@ services:
     # network_mode: "host"
     ports:
       - 5000:5000
+      - 5555:5555
+
+  flower:
+    image: mher/flower
+    command: ["flower", "--broker=pyamqp://admin:admin@rabbit:5672//", "--port=8888"]
+    depends_on:
+      - rabbit
+    ports:
+      - 8888:8888
