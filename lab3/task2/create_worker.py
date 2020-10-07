@@ -61,4 +61,3 @@ while inst_status == 'BUILD':
     inst_status = instance.status
 
 print("Instance: "+ instance.name +" is in " + inst_status + "state")
-
