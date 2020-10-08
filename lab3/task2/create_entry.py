@@ -40,7 +40,7 @@ else:
 
 #print("Path at terminal when executing this file")
 #print(os.getcwd() + "\n")
-cfg_file_path =  os.getcwd()+'/worker-cloud.txt'
+cfg_file_path =  os.getcwd()+'/worker-entry-cloud.txt'
 if os.path.isfile(cfg_file_path):
     userdata = open(cfg_file_path)
 else:

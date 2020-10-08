@@ -11,4 +11,4 @@ runcmd:
  - cd /home/ubuntu/
  - git clone https://github.com/Li-Ju666/acc-lab3.git && cd acc-lab3/task2/project/
  - wget http://192.168.2.49:8000/data/data.tar.gz && tar -xvf data.tar.gz && rm -f data.tar.gz
- - cd .. && sh ./worker.sh
+ - cd .. && sh ./worker-entry.sh

@@ -3,7 +3,7 @@ from flask_restful import Resource, Api
 
 from .tasks import analyze
 import time
-import os
+import os, random
 
 app = Flask(__name__)
 api = Api(app)
@@ -12,7 +12,7 @@ class Statistics(Resource):
     def __init__(self):
         self.stats = {'han':0, 'hon':0, 'den':0, 'det':0, 'denna':0, 'denne':0, 'hen':0}
 
-    def get_all(self):
+    def get_int(self, num):
         # check if stats has been done
         records = 0
         for key in self.stats:
@@ -21,13 +21,15 @@ class Statistics(Resource):
         # do full statistics if stats is empty
         if records == 0:
             baseDir = "project/data/"
-            files = os.listdir(baseDir)
+            all_files = os.listdir(baseDir)
+            files = []
+            for i in range(0, num):
+                files.append(all_files[random.randint(0,101)])
             files = map(lambda a: baseDir+a, files)
 
             results = []
             for i in files:
                 results.append(analyze.delay(i))
-
             finished = 0
             while (finished != len(results)):
                 print("Waiting...")
@@ -46,10 +48,10 @@ class Statistics(Resource):
                 self.stats['denne'] += tmp['denne']
                 self.stats['hen'] += tmp['hen']
         return self.stats
-    def get(self):
-        return self.get_all()
+    def get(self, num):
+        return self.get_int(num)
 
-api.add_resource(Statistics, '/')
+api.add_resource(Statistics, '/<int:num>')
 
 if __name__ == '__main__':
     app.run(debug=True, host= '0.0.0.0')
