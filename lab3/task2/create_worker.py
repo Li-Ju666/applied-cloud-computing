@@ -49,7 +49,7 @@ else:
 secgroups = ['default']
 
 print("Creating instance ... ")
-instance = nova.servers.create(name="liju-worker", key_name="liju_remote", image=image, flavor=flavor, userdata=userdata, nics=nics,security_groups=secgroups)
+instance = nova.servers.create(name="liju-worker2", key_name="liju_remote", image=image, flavor=flavor, userdata=userdata, nics=nics,security_groups=secgroups)
 inst_status = instance.status
 print("waiting for 10 seconds.. ")
 time.sleep(10)
