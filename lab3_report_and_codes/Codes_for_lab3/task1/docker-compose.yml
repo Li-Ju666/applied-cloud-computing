@@ -1,0 +1,23 @@
+version: '3.3'
+
+services: 
+  rabbit: 
+    hostname: admin
+    image: rabbitmq:3-management
+    environment: 
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+
+  worker: 
+    build: 
+      context: .
+      dockerfile: dockerfile
+    volumes: 
+      - ./:/app
+    # links: 
+    #   - rabbit
+    depends_on: 
+      - rabbit
+    # network_mode: "host"
+    ports:
+      - 5000:5000
